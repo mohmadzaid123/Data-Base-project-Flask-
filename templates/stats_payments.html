@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Payment Statistics</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/stats.css') }}">
+</head>
+<body>
+  <nav><a href="{{ url_for('dashboard') }}" class="logo">&larr; Back</a></nav>
+  <main>
+    <h2>Payment Statistics</h2>
+
+    <!-- Date Filter -->
+    <section>
+      <h3>Filter Payments by Date</h3>
+      <form method="get" action="{{ url_for('stats_payments') }}">
+        <label for="from">From:</label>
+        <input type="date" name="from" id="from" value="{{ from_date }}">
+        <label for="to">To:</label>
+        <input type="date" name="to" id="to" value="{{ to_date }}">
+        <button type="submit">Apply</button>
+      </form>
+    </section>
+
+    <!-- Total Revenue -->
+    <section>
+      <h3>Total Revenue (Paid, Filtered)</h3>
+      <p class="stat">₪{{ '%.2f'|format(total_revenue) }}</p>
+    </section>
+
+    <!-- Revenue by Method -->
+    <section>
+      <h3>Revenue by Payment Method (Filtered)</h3>
+      <table>
+        <thead><tr><th>Method</th><th>Revenue (₪)</th></tr></thead>
+        <tbody>
+          {% for r in revenue_by_method %}
+            <tr><td>{{ r[0].capitalize() }}</td><td>{{ '%.2f'|format(r[1]) }}</td></tr>
+          {% else %}
+            <tr><td colspan="2">No revenue in selected range.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Daily Revenue -->
+    <section>
+      <h3>Daily Revenue (Filtered)</h3>
+      <table>
+        <thead><tr><th>Date</th><th>Total (₪)</th></tr></thead>
+        <tbody>
+          {% for d in daily_revenue %}
+            <tr><td>{{ d[0] }}</td><td>{{ '%.2f'|format(d[1]) }}</td></tr>
+          {% else %}
+            <tr><td colspan="2">No payments in selected range.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Global Method Distribution -->
+    <section>
+      <h3>Method Distribution (All Time)</h3>
+      <ul class="simple-list">
+        {% for m in method_dist %}
+          <li>{{ m[0].capitalize() }}: {{ m[1] }}</li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <!-- Global Status Counts -->
+    <section>
+      <h3>Status Counts (All Time)</h3>
+      <table>
+        <thead><tr><th>Status</th><th>Count</th></tr></thead>
+        <tbody>
+          {% for s in status_counts %}
+            <tr><td>{{ s[0] }}</td><td>{{ s[1] }}</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+  </main>
+</body>
+</html>

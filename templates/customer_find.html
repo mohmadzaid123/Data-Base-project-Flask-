@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Find Customer</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/emp_style.css') }}">
+</head>
+<body>
+
+  <!-- ===== flash banners ===== -->
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="flash-container">
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <h2>Find Customer</h2>
+
+  <!-- ===== search form inside a soft card ===== -->
+  <div class="form-card">
+    <form method="POST" class="search-form">
+      <label for="cnum">Customer&nbsp;Number</label>
+      <input id="cnum" type="number" name="cnumber" required>
+      <button type="submit" class="submit-btn">Search</button>
+    </form>
+  </div>
+
+  {% if results is defined and results %}
+    <h3>Results</h3>
+    <ul class="result-list">
+      {% for c in results %}
+        <li>
+          {{ c[0] }} – {{ c[1] }} ({{ c[2] }})
+          <a class="small-btn"
+             href="{{ url_for('order_menu', customer_id=c[0]) }}">
+            Select
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% elif results is defined %}
+      <p></p>
+  {% endif %}
+
+</body>
+</html>

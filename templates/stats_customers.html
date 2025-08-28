@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Customer Statistics</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/stats.css') }}">
+</head>
+<body>
+  <nav><a href="{{ url_for('dashboard') }}" class="logo">&larr; Back</a></nav>
+  <main>
+    <h2>Customer Statistics</h2>
+
+    <section>
+      <h3>Single-Purchase Customers</h3>
+      <ul class="simple-list">
+        {% for c in single_purchase %}
+          <li>{{ c[1] }} (ID {{ c[0] }})</li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <section>
+      <h3>Filter Customers by Order Count</h3>
+      <form method="get" action="{{ url_for('stats_customers') }}">
+        <label for="min_orders">Min Orders:</label>
+        <input type="number" name="min_orders" id="min_orders" value="{{ min_orders }}" min="0">
+        <label for="max_orders">Max Orders:</label>
+        <input type="number" name="max_orders" id="max_orders" value="{{ max_orders }}" min="1">
+        <button type="submit">Apply Filter</button>
+      </form>
+    </section>
+
+    <section>
+      <h3>Customers</h3>
+      <ul class="simple-list">
+        {% for c in filtered_customers %}
+          <li>{{ c[1] }} (ID {{ c[0] }}) — Orders: {{ c[2] }}</li>
+        {% else %}
+          <li>No customers match the filter.</li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <section>
+      <h3>Loyalty Points vs Total Spending</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Customer</th>
+            <th>Loyalty Points</th>
+            <th>Total Spent ($)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in loyalty_vs_spending %}
+            <tr>
+              <td>{{ row[0] }}</td>
+              <td>{{ row[1] }}</td>
+              <td>{{ '%.2f' | format(row[2]) }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+</body>
+</html>

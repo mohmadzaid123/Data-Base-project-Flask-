@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Order Statistics</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/stats.css') }}">
+</head>
+<body>
+  <nav>
+    <a href="{{ url_for('dashboard') }}" class="logo">&larr; Back</a>
+  </nav>
+  <main>
+    <h2>Order Statistics</h2>
+
+    <section>
+      <h3>Filter Orders by Date</h3>
+      <form method="get" action="{{ url_for('stats_orders') }}">
+        <label for="from">From:</label>
+        <input type="date" name="from" id="from" value="{{ from_date }}">
+        <label for="to">To:</label>
+        <input type="date" name="to" id="to" value="{{ to_date }}">
+        <button type="submit">Apply Filter</button>
+      </form>
+    </section>
+
+    <section>
+      <h3>Orders Per Day (Filtered)</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th># Orders</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for o in orders_per_day %}
+          <tr>
+            <td>{{ o[0] }}</td>
+            <td>{{ o[1] }}</td>
+          </tr>
+          {% else %}
+          <tr>
+            <td colspan="2">No orders found in this range.</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h3>Orders by Warehouse</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Warehouse</th>
+            <th># Orders</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for w in orders_by_warehouse %}
+          <tr>
+            <td>{{ w[0] }}</td>
+            <td>{{ w[1] }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+  <h3>Employee Performance (Paid Orders Only)</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Employee</th>
+        <th>Orders Handled</th>
+        <th>Total Collected (₪)</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for e in employee_performance %}
+      <tr>
+        <td>{{ e[0] }}</td>
+        <td>{{ e[1] }}</td>
+        <td>{{ '%.2f'|format(e[2]) }}</td>
+      </tr>
+      {% else %}
+      <tr>
+        <td colspan="3">No paid orders found.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+
+
+    <section>
+      <h3>Avg Order Value</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Customer</th>
+            <th>Avg Value (₪)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for a in avg_order_value %}
+          <tr>
+            <td>{{ a[0] }}</td>
+            <td>{{ '%.2f'|format(a[1]) }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h3>Top 5 Customers</h3>
+      <ol class="simple-list">
+        {% for t in top_customers %}
+        <li>{{ t[0] }} – ₪{{ '%.2f'|format(t[1]) }}</li>
+        {% endfor %}
+      </ol>
+    </section>
+
+    <section>
+      <h3>Pending Orders</h3>
+      <p class="stat">{{ pending_count }}</p>
+    </section>
+
+    <section>
+      <h3>Sales by Warehouse</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Warehouse</th>
+            <th>Sales (₪)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for s in sales_by_warehouse %}
+          <tr>
+            <td>{{ s[0] }}</td>
+            <td>{{ '%.2f'|format(s[1]) }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Manage Users</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/users.css') }}">
+</head>
+<body>
+  <nav>
+    <a href="{{ url_for('dashboard') }}" class="logo">&larr; Back</a>
+  </nav>
+
+  <h1>Manage Users</h1>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="flash-container">
+        {% for category, msg in messages %}
+          <div class="alert alert-{{ category }}">{{ msg }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+
+
+
+
+  <h2>Add User</h2>
+  <div class="form-wrapper">
+    <form action="{{ url_for('user_manage') }}" method="post" class="add-form">
+      <div class="form-row">
+        <label for="uname">Username:</label>
+        <input id="uname" name="username" type="text" required>
+      </div>
+
+      <div class="form-row">
+        <label for="pwd">Password:</label>
+        <input id="pwd" name="password" type="password" required>
+      </div>
+
+      <div class="form-row">
+        <label for="eid">Employee ID:</label>
+        <input id="eid" name="employee_id" type="number" required>
+      </div>
+
+      <div class="center-btn">
+        <input type="hidden" name="action" value="add">
+        <button type="submit">Add User</button>
+      </div>
+    </form>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Password</th>
+        <th>Employee ID</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for u in users %}
+      <tr>
+        <td>{{ u[0] }}</td>
+        <td>{{ u[1] }}</td>
+        <td>••••••</td>
+        <td>{{ u[2] }}</td>
+        <td>
+          <form action="{{ url_for('user_manage') }}" method="post">
+            <input type="hidden" name="action" value="load">
+            <input type="hidden" name="user_id" value="{{ u[0] }}">
+            <button type="submit">Edit</button>
+          </form>
+          <form action="{{ url_for('user_manage') }}" method="post">
+            <input type="hidden" name="action" value="delete">
+            <input type="hidden" name="user_id" value="{{ u[0] }}">
+            <button type="submit">Delete</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+  {% if edit_user %}
+    <h2>Edit User</h2>
+    <div class="form-wrapper">
+      <form action="{{ url_for('user_manage') }}" method="post" class="edit-form">
+        <input type="hidden" name="action" value="update">
+        <input type="hidden" name="user_id" value="{{ edit_user[0] }}">
+
+        <div class="form-row">
+          <label>Username:</label>
+          <input name="username" type="text" value="{{ edit_user[1] }}" required>
+        </div>
+
+        <div class="form-row">
+          <label>Password:</label>
+          <input name="password" type="text" value="{{ edit_user[2] }}" required>
+        </div>
+
+        <div class="form-row">
+          <label>Employee ID:</label>
+          <input name="employee_id" type="number" value="{{ edit_user[3] }}" required>
+        </div>
+
+        <div class="center-btn">
+          <button type="submit">Update User</button>
+        </div>
+      </form>
+    </div>
+  {% endif %}
+
+
+</body>
+</html>

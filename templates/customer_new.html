@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Add Customer</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/emp_style.css') }}">
+</head>
+<body>
+
+  <!-- ===== flash banners ===== -->
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="flash-container">
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <h2>Add New Customer</h2>
+
+  <!-- ===== soft card wrapper matches new CSS ===== -->
+  <div class="form-card">
+    <form method="POST">
+      <label for="cust_name">Name</label>
+      <input id="cust_name" type="text" name="name" required>
+
+      <label for="cust_num">Number</label>
+      <input id="cust_num" type="number" name="cnumber" required>
+
+      <button type="submit" class="submit-btn">
+        Save&nbsp;&amp;&nbsp;Go&nbsp;to&nbsp;Menu
+      </button>
+    </form>
+  </div>
+
+</body>
+</html>

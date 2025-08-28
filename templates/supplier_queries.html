@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Supplier Queries</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+<body>
+  <nav><a href="{{ url_for('dashboard') }}" class="logo">&larr; Back</a></nav>
+  <main>
+    <h2>Supplier Queries</h2>
+
+    <section>
+      <h3>Top-Rated Suppliers (Rating ≥ 4.5)</h3>
+      {% if top_suppliers %}
+        <table>
+          <thead><tr>{% for col in top_suppliers_cols %}<th>{{ col }}</th>{% endfor %}</tr></thead>
+          <tbody>{% for row in top_suppliers %}
+            <tr>{% for val in row %}<td>{{ val }}</td>{% endfor %}</tr>{% endfor %}</tbody>
+        </table>
+      {% else %}<p>No top-rated suppliers found.</p>{% endif %}
+    </section>
+
+    <section>
+      <h3>Total Supplies Per Supplier</h3>
+      {% if total_supplied %}
+        <table>
+          <thead><tr>{% for col in total_supplied_cols %}<th>{{ col }}</th>{% endfor %}</tr></thead>
+          <tbody>{% for row in total_supplied %}
+            <tr>{% for val in row %}<td>{{ val }}</td>{% endfor %}</tr>{% endfor %}</tbody>
+        </table>
+      {% else %}<p>No supply data found.</p>{% endif %}
+    </section>
+
+    <section>
+      <h3>Low Supply Items (Qty &lt; 5)</h3>
+      {% if low_supply %}
+        <table>
+          <thead><tr>{% for col in low_supply_cols %}<th>{{ col }}</th>{% endfor %}</tr></thead>
+          <tbody>{% for row in low_supply %}
+            <tr>{% for val in row %}<td>{{ val }}</td>{% endfor %}</tr>{% endfor %}</tbody>
+        </table>
+      {% else %}<p>No low-supply items found.</p>{% endif %}
+    </section>
+
+    <section>
+      <h3>Supplier Contribution Value</h3>
+      {% if supplier_value %}
+        <table>
+          <thead><tr>{% for col in supplier_value_cols %}<th>{{ col }}</th>{% endfor %}</tr></thead>
+          <tbody>{% for row in supplier_value %}
+            <tr>{% for val in row %}<td>{{ val }}</td>{% endfor %}</tr>{% endfor %}</tbody>
+        </table>
+      {% else %}<p>No value data available.</p>{% endif %}
+    </section>
+  </main>
+</body>
+</html>

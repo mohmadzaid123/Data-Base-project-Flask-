@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Payment</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/emp_style.css') }}">
+</head>
+<body>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="flash-container">
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <h2>Payment for Order #{{ order_id }}</h2>
+
+  <div class="form-card">
+    <p style="font-size:1rem;">
+      Current&nbsp;Loyalty&nbsp;Points:&nbsp;<strong>{{ points }}</strong>
+    </p>
+    <p style="font-size:1.2rem; font-weight:bold; margin-top:6px;">
+      Total&nbsp;Amount:&nbsp;₪ {{ '%.2f' % total }}
+    </p>
+
+    <form method="POST" class="pay-form">
+      <label>Method</label>
+      <div class="radio-group">
+        <label class="radio-option">
+          <input type="radio" name="method" value="cash" required>
+          <span>Cash</span>
+        </label>
+        <label class="radio-option">
+          <input type="radio" name="method" value="visa">
+          <span>Visa</span>
+        </label>
+        <label class="radio-option">
+          <input type="radio" name="method" value="loyaltypoint">
+          <span>Loyalty Point</span>
+        </label>
+      </div>
+
+      <label>State</label>
+      <div class="radio-group">
+        <label class="radio-option">
+          <input type="radio" name="state" value="paid" required>
+          <span>Paid</span>
+        </label>
+        <label class="radio-option">
+          <input type="radio" name="state" value="pending">
+          <span>Pending</span>
+        </label>
+      </div>
+
+      <button class="submit-btn" style="margin-top:20px;">Save Payment</button>
+    </form>
+
+    <!-- Cancel order -->
+    <button class="small-btn danger" style="width:100%; margin-top:18px;"
+            onclick="location.href='{{ url_for('payment_page', order_id=order_id, cancel=1) }}'">
+      Cancel&nbsp;Order
+    </button>
+  </div>
+
+</body>
+</html>

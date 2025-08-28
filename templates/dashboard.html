@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Manager Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+<body>
+  <nav>
+    <a href="{{ url_for('home') }}" class="logo">
+  <img src="{{ url_for('static', filename='images/espressoshotlogot.png') }}" alt="Espresso Logo" class="logo-img">
+</a>
+    <div class="nav-links">
+
+      <a href="{{ url_for('dashboard') }}" class="active">Dashboard</a>
+      <a href="{{ url_for('logout') }}">Logout</a>
+    </div>
+  </nav>
+
+  <main>
+    <h1>Manager Dashboard</h1>
+
+    <!-- OVERVIEW CARDS -->
+    <div class="overview-card">
+      <div>Total Customers: <strong>{{ total_customers }}</strong></div>
+      <div>Total Users:      <strong>{{ total_users }}</strong></div>
+      <div>Total Orders:     <strong>{{ total_orders }}</strong></div>
+      <div>Total Revenue:    <strong>${{ '%.2f'|format(total_revenue) }}</strong></div>
+    </div>
+
+    <!-- NAV CARDS -->
+    <section class="dash-cards">
+      <div class="dash-card">
+        <h3>Warehouse</h3>
+        <a class="dash-btn" href="{{ url_for('warehouse_page') }}">Manage Warehouses</a>
+      </div>
+      <div class="dash-card">
+        <h3>Users</h3>
+        <a class="dash-btn" href="{{ url_for('user_manage') }}">Manage Users</a>
+      </div>
+      <div class="dash-card">
+        <h3>Orders</h3>
+        <a class="dash-btn" href="{{ url_for('stats_orders') }}">Order Stats</a>
+      </div>
+      <div class="dash-card">
+        <h3>Payments</h3>
+        <a class="dash-btn" href="{{ url_for('stats_payments') }}">Payment Stats</a>
+      </div>
+      <div class="dash-card">
+        <h3>Customers</h3>
+        <a class="dash-btn" href="{{ url_for('stats_customers') }}">Customer Stats</a>
+      </div>
+
+       <div class="dash-card">
+        <h3>Menu</h3>
+        <a class="dash-btn" href="{{ url_for('menu_page') }}">Manage Menu</a>
+      </div>
+
+
+        <div class="dash-card">
+  <h3>Branch Queries</h3>
+  <a class="dash-btn" href="{{ url_for('branch_queries') }}">View Branch Data</a>
+</div>
+
+     <div class="dash-card">
+  <h3>Suppliers</h3>
+  <a class="dash-btn" href="{{ url_for('supplier_queries') }}">Supplier Queries</a>
+</div>
+
+
+
+    </section>
+
+  </main>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>New Order</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/emp_style.css') }}">
+</head>
+<body>
+
+  <h2>Customer #{{ customer_id }} – New Order</h2>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="flash-container">
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+
+
+  <form method="POST">
+    <div class="menu-grid">
+      {% for item in menu_items %}
+        <div class="menu-card">
+          <h3>{{ item[1] }}</h3>
+          <p>Price: ₪{{ item[3] }}</p>
+
+          <label for="q{{ item[0] }}">Qty</label>
+          <input id="q{{ item[0] }}"
+                 type="number" name="quantity"
+                 min="0" value="0">
+
+          <input type="hidden" name="item_id" value="{{ item[0] }}">
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="center-btn">
+      <button type="submit" class="submit-btn">Submit Order</button>
+    </div>
+  </form>
+
+</body>
+</html>

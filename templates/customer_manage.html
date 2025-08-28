@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Edit / Delete Customer</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/emp_style.css') }}">
+</head>
+<body>
+
+  <!-- flash banners -->
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="flash-container">
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <h2>Edit / Delete Customer</h2>
+
+  <!-- ===== SEARCH CARD ===== -->
+  <div class="form-card">
+    <form method="POST">
+      <input type="hidden" name="action" value="load">
+      <label for="find_num">Customer&nbsp;Number</label>
+      <input id="find_num" type="number" name="cnumber" required>
+      <button class="submit-btn">Load Customer</button>
+    </form>
+  </div>
+
+  {% if customer is defined %}
+    <!-- ===== EDIT / DELETE CARD ===== -->
+    <div class="form-card">
+      <form method="POST">
+        <input type="hidden" name="action"   value="update">
+        <input type="hidden" name="cnumber" value="{{ customer[2] }}">
+
+        <label>ID</label>
+        <input type="text" value="{{ customer[0] }}" disabled>
+
+        <label>Number</label>
+        <input type="text" value="{{ customer[2] }}" disabled>
+
+        <label for="new_name">Name</label>
+        <input id="new_name" type="text" name="name"
+               value="{{ customer[1] }}" required>
+
+        <button class="submit-btn">Save Changes</button>
+      </form>
+
+      <form method="POST" style="margin-top:15px;">
+        <input type="hidden" name="action"   value="delete">
+        <input type="hidden" name="cnumber" value="{{ customer[2] }}">
+        <button class="small-btn danger" style="width:100%;">
+          Delete Customer
+        </button>
+      </form>
+    </div>
+  {% endif %}
+
+</body>
+</html>

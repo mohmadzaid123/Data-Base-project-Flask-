@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Manage Warehouses</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/warehouse.css') }}">
+</head>
+<body>
+
+  <nav>
+    <a href="{{ url_for('dashboard') }}" class="logo">&larr; Back</a>
+  </nav>
+
+  <h1>Warehouses</h1>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="flash-container">
+        {% for category, msg in messages %}
+          <div class="alert alert-{{ category }}">{{ msg }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Address</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for w in warehouses %}
+      <tr>
+        <td>{{ w[0] }}</td>
+        <td>{{ w[1] }}</td>
+        <td>
+          <form action="{{ url_for('update_warehouse', warehouse_id=w[0]) }}"
+                method="post" style="display:inline-block">
+            <input name="Address" type="text" placeholder="New Address" required>
+            <button type="submit">Update</button>
+          </form>
+          <form action="{{ url_for('delete_warehouse', warehouse_id=w[0]) }}"
+                method="post" style="display:inline-block">
+            <button type="submit">Delete</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <h2>Add Warehouse</h2>
+  <form action="{{ url_for('add_warehouse') }}" method="post" class="add-form">
+    <label for="wid">Warehouse ID:</label>
+    <input id="wid" type="number" name="Warehouse_ID" required>
+
+    <label for="addr">Address:</label>
+    <input id="addr" type="text" name="Address" required>
+
+    <button type="submit">Add Warehouse</button>
+  </form>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Employee Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/emp_style.css') }}">
+</head>
+<body>
+
+   <nav>
+    <a href="{{ url_for('employee_page') }}" class="logo">
+  <img src="{{ url_for('static', filename='images/espressoshotlogot.png') }}" alt="Espresso Logo" class="logo-img">
+</a>
+    <div class="nav-links">
+
+      <a href="{{ url_for('employee_page') }}" class="active">System</a>
+      <a href="{{ url_for('logout') }}">Logout</a>
+    </div>
+  </nav>
+
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="flash-container">
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <h1>Welcome</h1>
+  <div class="dashboard-stats">
+    <div class="stats-card">
+      <span class="stats-number">{{ order_count }}</span>
+      <div class="stats-label">Orders Today</div>
+    </div>
+    <div class="stats-card">
+      <span class="stats-number">{{ pending_orders|length }}</span>
+      <div class="stats-label">Pending</div>
+    </div>
+  </div>
+
+  <!-- === Customer buttons (unchanged) === -->
+  <section class="customer-actions">
+    <button class="cust-btn" onclick="location.href='{{ url_for('customer_new') }}'">
+      ➕ Add New Customer
+    </button>
+    <button class="cust-btn alt" onclick="location.href='{{ url_for('customer_find') }}'">
+      🔍 Find Customer
+    </button>
+    <button class="cust-btn alt" onclick="location.href='{{ url_for('customer_manage') }}'">
+      📝 Edit&nbsp;/&nbsp;Delete&nbsp;Customer
+    </button>
+  </section>
+
+  <!-- ========== PENDING ORDERS ========== -->
+  <section class="pending-orders-section">
+    <h2>Pending Orders</h2>
+    {% if pending_orders %}
+      <div class="pending-orders">
+        {% for o in pending_orders %}
+          <div class="order-card">
+            <p><strong>Order ID:</strong> {{ o[0] }}</p>
+            <p><strong>Customer name:</strong> {{ o[1] }}</p>
+            <p><strong>Total:</strong> ₪{{ '%.2f'|format(o[3]) }}</p>
+            <p><strong>Status:</strong> {{ o[2] }}</p>
+
+            <div class="inline-form">
+              <a href="{{ url_for('edit_order', order_id=o[0]) }}" class="small-btn">Update</a>
+
+              <form method="POST" action="{{ url_for('mark_not_completed', order_id=o[0]) }}">
+                <button type="submit" class="small-btn">Not Paid</button>
+              </form>
+
+              <form method="POST" action="{{ url_for('mark_paid', order_id=o[0]) }}">
+                <button type="submit" class="small-btn confirm">Mark as Paid</button>
+              </form>
+
+              <a href="{{ url_for('payment_page', order_id=o[0], cancel=1) }}" class="small-btn danger">Cancel</a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p>No pending orders.</p>
+    {% endif %}
+  </section>
+
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Branch Queries</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+<body>
+  <nav><a href="{{ url_for('dashboard') }}" class="logo">&larr; Back</a></nav>
+  <main>
+    <h2>Branch Queries</h2>
+
+    <section>
+      <h3>Top 5 Branches by Number of Employees</h3>
+      {% if branch_employees %}
+        <table>
+          <thead><tr>{% for col in branch_employees_cols %}<th>{{ col }}</th>{% endfor %}</tr></thead>
+          <tbody>{% for row in branch_employees %}
+            <tr>{% for val in row %}<td>{{ val }}</td>{% endfor %}</tr>{% endfor %}
+          </tbody>
+        </table>
+      {% else %}<p>No data found.</p>{% endif %}
+    </section>
+
+    <section>
+      <h3>Branches with Pending Orders</h3>
+      {% if pending_orders %}
+        <table>
+          <thead><tr>{% for col in pending_orders_cols %}<th>{{ col }}</th>{% endfor %}</tr></thead>
+          <tbody>{% for row in pending_orders %}
+            <tr>{% for val in row %}<td>{{ val }}</td>{% endfor %}</tr>{% endfor %}
+          </tbody>
+        </table>
+      {% else %}<p>No pending orders.</p>{% endif %}
+    </section>
+
+    <section>
+      <h3>Branch Revenue Summary</h3>
+      {% if branch_revenue %}
+        <table>
+          <thead><tr>{% for col in branch_revenue_cols %}<th>{{ col }}</th>{% endfor %}</tr></thead>
+          <tbody>{% for row in branch_revenue %}
+            <tr>{% for val in row %}<td>{{ val }}</td>{% endfor %}</tr>{% endfor %}
+          </tbody>
+        </table>
+      {% else %}<p>No revenue data available.</p>{% endif %}
+    </section>
+
+    <section>
+      <h3>Top Performing Branch This Month (Revenue)</h3>
+      {% if top_branch_month %}
+        <table>
+          <thead><tr>{% for col in top_branch_month_cols %}<th>{{ col }}</th>{% endfor %}</tr></thead>
+          <tbody>{% for row in top_branch_month %}
+            <tr>{% for val in row %}<td>{{ val }}</td>{% endfor %}</tr>{% endfor %}
+          </tbody>
+        </table>
+      {% else %}<p>No data found.</p>{% endif %}
+    </section>
+
+    <section>
+      <h3>Branches Without Any Orders in the Last 30 Days</h3>
+      {% if inactive_branches %}
+        <table>
+          <thead><tr>{% for col in inactive_branches_cols %}<th>{{ col }}</th>{% endfor %}</tr></thead>
+          <tbody>{% for row in inactive_branches %}
+            <tr>{% for val in row %}<td>{{ val }}</td>{% endfor %}</tr>{% endfor %}
+          </tbody>
+        </table>
+      {% else %}<p>All branches had activity in the last 30 days.</p>{% endif %}
+    </section>
+
+    <section>
+      <h3>Branch with Highest Average Order Value</h3>
+      {% if highest_avg_order_branch %}
+        <table>
+          <thead><tr>{% for col in highest_avg_order_branch_cols %}<th>{{ col }}</th>{% endfor %}</tr></thead>
+          <tbody>{% for row in highest_avg_order_branch %}
+            <tr>{% for val in row %}<td>{{ val }}</td>{% endfor %}</tr>{% endfor %}
+          </tbody>
+        </table>
+      {% else %}<p>No data found.</p>{% endif %}
+    </section>
+
+    <section>
+      <h3>Number of Customers Served Per Branch</h3>
+      {% if customers_per_branch %}
+        <table>
+          <thead><tr>{% for col in customers_per_branch_cols %}<th>{{ col }}</th>{% endfor %}</tr></thead>
+          <tbody>{% for row in customers_per_branch %}
+            <tr>{% for val in row %}<td>{{ val }}</td>{% endfor %}</tr>{% endfor %}
+          </tbody>
+        </table>
+      {% else %}<p>No customer data available.</p>{% endif %}
+    </section>
+
+  </main>
+</body>
+</html>
