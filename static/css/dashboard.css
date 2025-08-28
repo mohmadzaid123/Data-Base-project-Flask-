@@ -1,0 +1,228 @@
+/* Reset & Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background-color: #fff;
+  color: #000;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* Header & Navigation */
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  height: 60px;
+  background: #000;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Logo (text or image) */
+nav .logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+nav .logo img.logo-img {
+  height: 100%;
+  max-height: 50px;
+  width: auto;
+}
+
+/* Nav links */
+nav .nav-links a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  margin-left: 20px;
+  transition: background-color .3s, color .3s;
+  padding: 6px 8px;
+}
+
+nav .nav-links a:hover,
+nav .nav-links .active {
+  background: #fff;
+  color: #000;
+  border-radius: 4px;
+}
+
+/* Main container */
+main {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 0 20px;
+}
+
+/* Titles */
+h1, h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.6rem;
+  border-bottom: 2px solid #000;
+  padding-bottom: 6px;
+  margin-bottom: 30px;
+}
+
+/* Sections spacing */
+section {
+  margin-bottom: 40px;
+}
+
+/* Simple lists */
+.simple-list {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.simple-list li {
+  padding: 6px 0;
+  border-bottom: 1px solid #000;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+table th,
+table td {
+  border: 1px solid #000;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+table th {
+  background: #000;
+  color: #fff;
+}
+
+/* Big stat */
+.stat {
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* Buttons (generic) */
+.submit-btn,
+.small-btn,
+.cust-btn {
+  display: inline-block;
+  background: #000;
+  color: #fff;
+  text-decoration: none;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 14px;
+  font-weight: bold;
+  transition: background-color .3s ease;
+  cursor: pointer;
+}
+
+.submit-btn:hover,
+.small-btn:hover,
+.cust-btn:hover {
+  background: #fff;
+  color: #000;
+  border: 1px solid #000;
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  nav {
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
+  }
+  nav .nav-links {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+  }
+  table, .simple-list li {
+    font-size: 0.9rem;
+  }
+}
+
+/* Overview box */
+.overview-card {
+  border: 2px dashed #000;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 900px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+  gap: 10px;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Dash cards wrapper */
+.dash-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px,1fr));
+  gap: 20px;
+  max-width: 900px;
+  margin: 30px auto;
+}
+
+/* Individual card: uniform size, button at bottom */
+.dash-card {
+  width: 180px;
+  margin: 0 auto;
+  border: 1px solid #000;
+  background: #fff;
+  padding: 15px;
+  border-radius: 6px;
+
+  /* make cards equal height & push button down */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 140px; /* adjust as needed */
+  text-align: center;
+}
+
+.dash-card h3 {
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+}
+
+/* Full-width, single-line nav buttons */
+.dash-btn {
+  display: block;
+  width: 100%;
+  background: #000;
+  color: #fff;
+  text-decoration: none;
+  padding: 6px 8px;
+  font-size: 0.85rem;
+  border-radius: 4px;
+  transition: background .3s, color .3s;
+}
+
+.dash-btn:hover {
+  background: #fff;
+  color: #000;
+  border: 1px solid #000;
+}

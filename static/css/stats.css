@@ -1,0 +1,164 @@
+/* Reset & Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #fff;
+  color: #000;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* Nav Bar – Same as warehouse */
+nav {
+  display: flex;
+  align-items: center;
+  background: #000;
+  padding: 0 30px;
+  height: 60px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+nav .logo {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background 0.3s, color 0.3s;
+}
+
+nav .logo:hover {
+  background: #fff;
+  color: #000;
+  border: 1px solid #000;
+}
+
+/* Main container */
+main {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 0 20px;
+}
+
+/* Titles */
+h1, h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #000;
+}
+
+h1 {
+  margin-top: 20px;
+}
+
+h2 {
+  font-size: 1.6rem;
+  border-bottom: 2px solid #000;
+  padding-bottom: 6px;
+  margin-bottom: 30px;
+}
+
+h3 {
+  font-size: 1.3rem;
+  margin-bottom: 12px;
+  color: #000;
+}
+
+/* Section spacing */
+section {
+  margin-bottom: 40px;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+table th,
+table td {
+  border: 1px solid #000;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+table th {
+  background: #000;
+  color: #fff;
+}
+
+/* Simple lists */
+.simple-list {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.simple-list li {
+  padding: 6px 0;
+  border-bottom: 1px solid #000;
+}
+
+/* Big stat */
+.stat {
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  nav {
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
+  }
+
+  table, .simple-list li {
+    font-size: 0.9rem;
+  }
+}
+
+
+form {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+form label {
+  font-weight: bold;
+}
+
+form input[type="number"] {
+  padding: 6px;
+  border: 1px solid #000;
+  border-radius: 4px;
+  width: 80px;
+}
+
+form button {
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+form button:hover {
+  background: #444;
+}

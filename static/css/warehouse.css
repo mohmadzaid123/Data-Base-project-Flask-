@@ -1,0 +1,147 @@
+/* Reset & Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+body {
+  background: #fff;
+  color: #000;
+  padding: 0 ;
+  min-height: 100vh;
+}
+
+/* Nav Bar */
+nav {
+  display: flex;
+  align-items: center;
+  background: #000;
+  padding: 0 30px;
+  height: 60px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+nav .logo {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background .3s, color .3s;
+}
+nav .logo:hover {
+  background: #fff;
+  color: #000;
+  border: 1px solid #000;
+}
+
+/* Page Titles */
+h1, h2 {
+  text-align: center;
+  color: #000;
+  margin-bottom: 15px;
+}
+h1 {
+  margin-top: 20px;
+}
+h2 {
+  font-size: 1.8rem;
+  border-bottom: 2px solid #000;
+  padding-bottom: 6px;
+  margin: 30px 0;
+}
+
+/* Flash Banners */
+.flash-container {
+  max-width: 800px;
+  margin: 0 auto 20px;
+}
+.flash-container .alert {
+  background: #fff3cd;
+  border: 1px solid #000;
+  color: #000;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+}
+
+/* Table */
+table {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto 30px;
+  border-collapse: collapse;
+}
+table th,
+table td {
+  border: 1px solid #000;
+  padding: 8px 12px;
+  text-align: left;
+}
+table th {
+  background: #000;
+  color: #fff;
+}
+
+/* Inline forms in table rows */
+form {
+  display: inline-block;
+  margin: 0 5px;
+}
+form input[type="text"] {
+  padding: 6px;
+  border: 1px solid #000;
+  border-radius: 4px;
+}
+form button {
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color .3s, color .3s;
+}
+form button:hover {
+  background: #fff;
+  color: #000;
+  border: 1px solid #000;
+}
+
+/* Add form */
+.add-form {
+  max-width: 500px;
+  margin: 20px auto;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: center;
+}
+.add-form label {
+  font-weight: bold;
+}
+.add-form input {
+  padding: 8px;
+  border: 1px solid #000;
+  border-radius: 4px;
+}
+.add-form button {
+  grid-column: span 2;
+  justify-self: center;
+  margin-top: 10px;
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background .3s, color .3s;
+}
+.add-form button:hover {
+  background: #fff;
+  color: #000;
+  border: 1px solid #000;
+}

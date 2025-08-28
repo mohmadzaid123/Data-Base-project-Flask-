@@ -1,0 +1,674 @@
+/* Global Box-Sizing and Variables */
+* {
+  box-sizing: border-box;
+}
+:root {
+  --color-bg: #fff;
+  --color-text: #000;
+  --color-border: #000;
+  --color-muted-bg: #f5f5f5;
+  --radius: 6px;
+  --spacing: 1rem;
+  --transition: 0.3s;
+  /* Button sizing variables */
+  --btn-font-size: 1.25rem;
+  --btn-padding-vertical: 0.75rem;   /* ~12px */
+  --btn-padding-horizontal: 1.5rem;  /* ~24px */
+}
+
+/* Global Styling */
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  padding: 0;
+  margin: 0;
+  min-height: 100vh;
+  /* If RTL is needed: uncomment next line */
+  /* direction: rtl; */
+}
+
+/* Page Titles */
+h1, h2 {
+  text-align: center;
+  color: var(--color-text);
+  margin-bottom: 15px;
+}
+h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+h2 {
+  font-size: 1.8rem;
+  border-bottom: 2px solid var(--color-border);
+  padding-bottom: 6px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+
+/* Header & Navigation */
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  height: 60px;
+  background: #000;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Logo (text or image) */
+nav .logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+nav .logo img.logo-img {
+  height: 100%;
+  max-height: 50px;
+  width: auto;
+}
+
+/* Nav links */
+nav .nav-links a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  margin-left: 20px;
+  transition: background-color .3s, color .3s;
+  padding: 6px 8px;
+}
+
+nav .nav-links a:hover,
+nav .nav-links .active {
+  background: #fff;
+  color: #000;
+  border-radius: 4px;
+}
+
+
+
+/* Dashboard Stats Card */
+.dashboard-stats {
+  max-width: 600px;
+  margin: 0 auto 30px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 20px;
+  text-align: center;
+}
+.stats-card {
+  display: inline-block;
+  padding: 15px 25px;
+  background: var(--color-muted-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  margin: 10px;
+}
+.stats-number {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--color-text);
+  display: block;
+  line-height: 1;
+}
+.stats-label {
+  font-size: 1rem;
+  color: var(--color-text);
+  margin-top: 5px;
+  font-weight: bold;
+}
+
+/* Menu Grid */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+  max-width: 1000px;
+  margin: 20px auto;
+}
+.menu-card {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 15px;
+  background-color: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.menu-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+  color: var(--color-text);
+  font-weight: bold;
+}
+.menu-card p {
+  font-size: 0.95rem;
+  margin: 3px 0;
+  color: var(--color-text);
+}
+.menu-card input[type="number"] {
+  margin-top: 10px;
+  padding: 6px;
+  font-size: 0.95rem;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  width: 100%;
+}
+
+/* Buttons (Submit, Customer, Small) */
+.submit-btn,
+.cust-btn,
+.small-btn {
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color var(--transition), color var(--transition), border var(--transition);
+  background: var(--color-border);
+  color: var(--color-bg);
+  border: none;
+  border-radius: var(--radius);
+  text-decoration: none;
+}
+.submit-btn {
+  display: block;
+  width: 200px;
+  margin: 30px auto;
+  padding: 12px;
+  font-size: 1rem;
+}
+.submit-btn:hover,
+.cust-btn:hover,
+.small-btn:hover {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+
+/* Pending Orders Section */
+.pending-orders-section {
+  margin-bottom: 40px;
+}
+.pending-orders {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 20px auto;
+}
+
+
+
+
+
+.order-card {
+  width: 380px;  /* or 360px or more, your choice */
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 15px;
+  font-size: 0.95rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.order-card p {
+  margin: 5px 0;
+  color: var(--color-text);
+  text-align: left;
+}
+.order-card strong {
+  font-weight: bold;
+}
+
+/* Responsive Fix */
+@media (max-width: 600px) {
+  .menu-grid,
+  .pending-orders {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Customer Actions Section */
+.customer-actions {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin: 25px 0;
+  flex-wrap: wrap;
+}
+.cust-btn.alt {
+  /* same as .cust-btn */
+}
+
+/* Flash / Alert Banners */
+.flash-container {
+  max-width: 800px;
+  margin: 0 auto 25px;
+  padding: 0 15px;
+}
+.flash-container .alert {
+  padding: 12px 18px;
+  margin-bottom: 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  animation: fadeSlide 0.4s ease-in-out;
+}
+.flash-container .alert-success,
+.flash-container .alert-warning,
+.flash-container .alert-info {
+  background: var(--color-muted-bg);
+  color: var(--color-text);
+}
+.flash-container .alert-danger {
+  background: var(--color-muted-bg);
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+@keyframes fadeSlide {
+  0% { opacity: 0; transform: translateY(-6px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Form Elements */
+.center-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+.customer-input {
+  width: 220px;
+  padding: 8px;
+  font-size: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  margin-bottom: 12px;
+}
+.order-form {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 15px 20px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-bg);
+}
+.order-form label {
+  display: block;
+  margin: 10px 0 4px;
+  font-weight: bold;
+  color: var(--color-text);
+}
+
+
+
+
+.order-form input {
+  width: 100%;
+  padding: 6px 8px;
+  font-size: 0.95rem;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+}
+.order-form button {
+  margin-top: 15px;
+  padding: 10px;
+  width: 100%;
+  background: var(--color-border);
+  color: var(--color-bg);
+  border: none;
+  border-radius: var(--radius);
+  font-weight: bold;
+  cursor: pointer;
+}
+.order-form button:hover {
+  background: var(--color-bg);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+
+.inline-form {
+  display: flex;
+  gap: 6px;
+  margin-top: 12px;
+  flex-wrap: wrap; /* allow wrapping if needed */
+  overflow: hidden; /* prevent scrollbar */
+}
+
+
+/* force these to sit inline, shrink to fit, and get nice rounded ends */
+.inline-form .small-btn,
+.inline-form button.small-btn {
+  display: inline-block;
+  width: auto;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  border-radius: var(--radius);
+  line-height: 1.2;
+  text-align: center;
+}
+
+.inline-form input[type="number"] {
+  width: 70px;
+  padding: 4px 6px;
+  font-size: 0.9rem;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+}
+
+.small-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+  background: var(--color-border);
+  color: var(--color-bg);
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color var(--transition), color var(--transition);
+  min-height: 36px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.small-btn.danger {
+  /* same base, hover handles inversion */
+}
+
+/* Form Cards */
+.form-card {
+  max-width: 420px;
+  margin: 35px auto;
+  padding: 25px 28px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+.form-card label {
+  display: block;
+  margin: 12px 0 6px;
+  font-weight: bold;
+  color: var(--color-text);
+}
+.form-card input {
+  width: 100%;
+  padding: 8px 10px;
+  font-size: 0.95rem;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+}
+.form-card .submit-btn {
+  width: 100%;
+  margin: 25px 0 0;
+}
+
+/* Search and Results */
+.search-form {
+  margin-bottom: 25px;
+}
+.result-list {
+  max-width: 420px;
+  margin: 0 auto;
+  list-style: none;
+  padding-left: 0;
+}
+.result-list li {
+  margin: 10px 0;
+  padding: 10px 12px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Payment Form Summary */
+.payment-summary {
+  background: var(--color-muted-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 15px;
+  margin-bottom: 25px;
+  text-align: center;
+}
+.loyalty-points {
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+.total-amount {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--color-text);
+}
+
+/* Pay-form sections */
+.pay-form .form-section {
+  margin-bottom: 30px;
+}
+.pay-form .section-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--color-text);
+  margin-bottom: 12px;
+  display: block;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 5px;
+}
+
+/* Custom-styled radio buttons */
+.radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 12px 0 25px;
+}
+.radio-option {
+  position: relative;
+  display: inline-block;
+}
+.radio-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+/* The span holds visible "card" */
+.radio-option span {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
+  position: relative;
+  color: var(--color-text);
+  background: var(--color-bg);
+  user-select: none;
+}
+/* Custom circle */
+.radio-option span::before {
+  content: "";
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid var(--color-border);
+  border-radius: 50%;
+  margin-right: 0.5rem;
+  box-sizing: border-box;
+  background: var(--color-bg);
+}
+/* Checked state */
+.radio-option input[type="radio"]:checked + span {
+  background: var(--color-text);
+  color: var(--color-bg);
+  border-color: var(--color-text);
+}
+.radio-option input[type="radio"]:checked + span::before {
+  background: var(--color-bg);
+  border-color: var(--color-bg);
+}
+/* Hover and focus */
+.radio-option span:hover {
+  background: var(--color-muted-bg);
+  color: var(--color-text);
+}
+.radio-option input[type="radio"]:focus + span {
+  outline: 2px solid var(--color-border);
+  outline-offset: 2px;
+}
+
+/* Action Buttons (black-and-white theme), made larger */
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: var(--btn-padding-vertical) var(--btn-padding-horizontal);
+  font-size: var(--btn-font-size);
+  font-weight: bold;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  text-decoration: none;
+  cursor: pointer;
+  background: var(--color-bg);
+  color: var(--color-text);
+  transition: background-color var(--transition), color var(--transition), transform 0.1s;
+}
+.action-btn:hover,
+.action-btn:focus {
+  background: var(--color-text);
+  color: var(--color-bg);
+  transform: translateY(-1px);
+}
+/* Example usage:
+   <a href="..." class="action-btn">
+     <span class="icon">➕</span>
+     <span class="text">Add New Customer</span>
+   </a>
+   ...
+*/
+.action-btn .icon {
+  font-size: 1.4rem;
+  line-height: 1;
+}
+.action-btn .text {
+  line-height: 1;
+}
+
+/* Responsive: full-width buttons on small screens */
+@media (max-width: 600px) {
+  .action-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* General Text Styling */
+p {
+  color: var(--color-text);
+  margin-bottom: 8px;
+}
+
+/* Main Content Container */
+main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+section {
+  margin-bottom: 40px;
+}
+
+/* Focus states for accessibility */
+button:focus,
+.submit-btn:focus,
+.cust-btn:focus,
+.small-btn:focus,
+input:focus,
+select:focus,
+textarea:focus,
+.action-btn:focus {
+  outline: 2px solid var(--color-border);
+  outline-offset: 2px;
+}
+
+
+/* Ensure CSS variables exist (if not already): */
+:root {
+  --btn-font-size: 1.3rem;           /* Increase as desired */
+  --btn-padding-vertical: 0.75rem;   /* ~12px; increase for more height */
+  --btn-padding-horizontal: 1.5rem;  /* ~24px; increase for more width */
+  --btn-gap: 0.5rem;                 /* space if icon/text need separation */
+}
+
+/* Make cust-btn larger */
+.customer-actions .cust-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--btn-gap);
+  padding: var(--btn-padding-vertical) var(--btn-padding-horizontal);
+  font-size: var(--btn-font-size);
+  line-height: 1.2;
+  background: var(--color-border, #000);
+  color: var(--color-bg, #fff);
+  border: 1px solid var(--color-border, #000);
+  border-radius: var(--radius, 6px);
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, transform 0.1s;
+}
+
+/* Alt variant uses same sizing; keep same background or adjust if desired */
+.customer-actions .cust-btn.alt {
+  background: var(--color-border, #000);
+  color: var(--color-bg, #fff);
+  border: 1px solid var(--color-border, #000);
+}
+
+/* Hover/focus: invert colors */
+.customer-actions .cust-btn:hover,
+.customer-actions .cust-btn:focus {
+  background-color: var(--color-bg, #fff);
+  color: var(--color-text, #000);
+  transform: translateY(-1px);
+}
+
+/* Active state */
+.customer-actions .cust-btn:active {
+  transform: translateY(0);
+}
+
+.small-btn.confirm {
+  background-color: #198754;
+  color: white;
+  font-size: 0.85rem;
+  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.small-btn.confirm:hover {
+  background-color: #146c43;
+}
